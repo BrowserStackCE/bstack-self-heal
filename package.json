@@ -14,5 +14,8 @@
   "devDependencies": {
     "browserstack-node-sdk": "^1.57.1",
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.45.0"
   }
 }
