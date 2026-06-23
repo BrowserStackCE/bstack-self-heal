@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sweet Crumbs — Artisan Bakery</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- ============================================================
+       SELF-HEAL SYSTEM 
+       Every actionable element has a unique, descriptive ID/class.
+       On toggle, selectors swap to "-action-" variants:
+       ============================================================ -->
+  </head>
+  <body>
+    <!-- ===================== NAVIGATION ===================== -->
+    <nav>
+      <div class="logo">Sweet<span>Crumbs</span></div>
+
+      <!-- Self-Heal Toggle -->
+      <label
+        class="heal-toggle"
+        id="healToggle"
+        title="Swap actionable selectors to -action- variants"
+      >
+        🛡️ Self-Heal
+        <input type="checkbox" id="healCheck" />
+        <span class="switch-track"></span>
+        <span class="heal-badge" id="healBadge">DEFAULT</span>
+      </label>
+
+      <div class="links">
+        <a href="#menu">Menu</a>
+        <a href="#about">Our Story</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#order">Order</a>
+      </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <h1>Baked with <em>Love</em>,<br />Served with Joy</h1>
+      <p>
+        Handcrafted cakes, pastries & breads made fresh every morning from our
+        little kitchen to your table.
+      </p>
+      <button
+        id="explore-menu-btn"
+        onclick="document.getElementById('menu').scrollIntoView()"
+      >
+        Explore Menu
+      </button>
+    </section>
+
+    <!-- ===================== MENU GRID ===================== -->
+    <section class="menu" id="menu">
+      <h2 class="section-title">Our Bestsellers</h2>
+      <p class="section-sub">Freshly baked, always delightful</p>
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="about" id="about">
+      <div class="img-placeholder">🧁</div>
+      <div class="text">
+        <h2>A Pinch of Passion in Every Bite</h2>
+        <p>
+          Founded in 2018, Sweet Crumbs started as a weekend hobby and grew into
+          the neighbourhood's favourite bakery.
+        </p>
+        <p>
+          We source organic flour, free-range eggs, and real butter — because
+          shortcuts don't belong in a kitchen.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== TESTIMONIALS ===================== -->
+    <section class="testimonials" id="reviews">
+      <h2 class="section-title">What People Say</h2>
+      <p class="section-sub">Real reviews from real cake lovers</p>
+      <div class="testimonial-track" id="reviewTrack"></div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section class="cta-section" id="order">
+      <h2>Craving Something Sweet?</h2>
+      <p>Order online for same-day delivery — or drop us a message!</p>
+      <div class="cta-buttons">
+        <button id="order-now-btn">Order Now →</button>
+        <button id="contact-us-btn">Contact Us ✉️</button>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT MODAL ===================== -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <button id="modal-close-btn">✕</button>
+        <h2>Get in Touch 💌</h2>
+        <p class="modal-sub">We'll get back to you within 24 hours.</p>
+
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <input
+            type="text"
+            class="contact-name-input"
+            placeholder="Your Name"
+            required
+          />
+          <input
+            type="email"
+            class="contact-email-input"
+            placeholder="Your Email"
+            required
+          />
+          <textarea
+            class="contact-message-input"
+            placeholder="Tell us what you're looking for…"
+            required
+          ></textarea>
+          <button type="submit" id="send-message-btn">Send Message →</button>
+          <!-- TODO: update id selector -->
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">✅ Message sent! We'll be in touch.</div>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>© 2026 Sweet Crumbs Bakery. Made with 🤎 and flour.</footer>
+
+    <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+    <script>
+      /* ========== DATA ========== */
+      const cakes = [
+        { emoji: '🎂', name: 'Classic Vanilla', price: '$28' },
+        { emoji: '🍫', name: 'Dark Chocolate Fudge', price: '$32' },
+        { emoji: '🍓', name: 'Strawberry Dream', price: '$30' },
+        { emoji: '🧁', name: 'Red Velvet Cupcakes', price: '$18' },
+        { emoji: '🥐', name: 'Butter Croissant', price: '$6' },
+        { emoji: '🍰', name: 'Tiramisu Slice', price: '$12' },
+      ];
+
+      const reviews = [
+        {
+          text: 'Best birthday cake we ever had! The chocolate layers were heavenly.',
+          author: 'Priya M.',
+          stars: 5,
+        },
+        {
+          text: 'Their croissants rival anything I had in Paris. Not exaggerating.',
+          author: 'James L.',
+          stars: 5,
+        },
+        {
+          text: 'Ordered a custom cake for our anniversary — it was a showstopper!',
+          author: 'Anita R.',
+          stars: 5,
+        },
+        {
+          text: 'The red velvet cupcakes are dangerously addictive. Send help.',
+          author: 'Tom K.',
+          stars: 4,
+        },
+      ];
+
+      /* ========== RENDER ========== */
+      function renderMenu() {
+        document.getElementById('menuGrid').innerHTML = cakes
+          .map(
+            (c) => `
+        <div class="menu-card">
+          <div class="emoji">${c.emoji}</div>
+          <h3>${c.name}</h3>
+          <p class="price">${c.price}</p>
+        </div>`,
+          )
+          .join('');
+      }
+
+      function renderReviews() {
+        document.getElementById('reviewTrack').innerHTML = reviews
+          .map(
+            (r) => `
+        <div class="testimonial">
+          <div class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</div>
+          <p>"${r.text}"</p>
+          <div class="author">— ${r.author}</div>
+        </div>`,
+          )
+          .join('');
+      }
+
+      /* ========== MODAL ========== */
+      const overlay = document.getElementById('modalOverlay');
+
+      /** Opens modal — works regardless of which ID the contact button currently has */
+      function openModal() {
+        overlay.classList.add('open');
+      }
+      function closeModal() {
+        overlay.classList.remove('open');
+      }
+
+      document
+        .getElementById('contact-us-btn')
+        .addEventListener('click', openModal);
+      document
+        .getElementById('modal-close-btn')
+        .addEventListener('click', closeModal);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal();
+      });
+
+      /* ========== FORM SUBMIT ========== */
+      function handleSubmit(e) {
+        e.preventDefault();
+        closeModal();
+        e.target.reset();
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+
+      /* ==========================================================
+       SELF-HEAL ENGINE (v3)
+       Swaps IDs on buttons and form, classes on inputs.
+       Pattern: "something-name" ↔ "something-name-action-suffix"
+       ========================================================== */
+
+      /**
+       * Complete mapping of every actionable element.
+       * type: 'id' swaps the element's id attribute
+       * type: 'class' swaps the element's class
+       */
+      const selectorMap = [
+        // --- BUTTONS (swap IDs) ---
+        { type: 'id', from: 'send-message-btn', to: 'send-message-action-btn' },
+
+        // --- FORM (swap ID) ---
+        { type: 'id', from: 'contact-form', to: 'contact-action-form' },
+      ];
+
+      const healCheck = document.getElementById('healCheck');
+      const healToggle = document.getElementById('healToggle');
+      const healBadge = document.getElementById('healBadge');
+
+      healCheck.addEventListener('change', () => {
+        const healed = healCheck.checked;
+
+        // Update pill state
+        healToggle.classList.toggle('active', healed);
+        healBadge.textContent = healed ? 'HEALED' : 'DEFAULT';
+
+        // Swap every mapped selector
+        selectorMap.forEach(({ type, from, to }) => {
+          const oldVal = healed ? from : to;
+          const newVal = healed ? to : from;
+
+          if (type === 'id') {
+            // Find element by its current ID and swap it
+            const el = document.getElementById(oldVal);
+            if (el) el.id = newVal;
+          }
+
+          if (type === 'class') {
+            // Find element by its current class and swap it
+            const el = document.querySelector(`.${oldVal}`);
+            if (el) {
+              el.classList.remove(oldVal);
+              el.classList.add(newVal);
+            }
+          }
+        });
+
+        // Re-bind event listeners to new IDs
+        // (since IDs changed, we re-attach click handlers)
+        const contactBtn = document.getElementById(
+          healed ? 'contact-us-action-btn' : 'contact-us-btn',
+        );
+        const closeBtn = document.getElementById(
+          healed ? 'modal-close-action-btn' : 'modal-close-btn',
+        );
+        if (contactBtn) contactBtn.onclick = openModal;
+        if (closeBtn) closeBtn.onclick = closeModal;
+
+        // Console log — full selector report for test scripts
+        console.log(
+          `\n[Self-Heal] Mode: ${healed ? '🛡️ HEALED' : '🔧 DEFAULT'}`,
+        );
+        console.log('─'.repeat(50));
+        selectorMap.forEach(({ type, from, to }) => {
+          const active = healed ? to : from;
+          const prefix = type === 'id' ? '#' : '.';
+          console.log(`  ${prefix}${active}`);
+        });
+        console.log('─'.repeat(50));
+      });
+
+      /* ========== INIT ========== */
+      renderMenu();
+      renderReviews();
+    </script>
+  </body>
+</html>
