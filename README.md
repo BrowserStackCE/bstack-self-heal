@@ -19,7 +19,7 @@ A demo project showcasing **BrowserStack Self-Heal** — an AI-powered feature t
 1. **Clone the repository**
 
    ```bash
-   git clone http://github.com/drasticCoder/bstack-self-heal.git
+   git clone https://github.com/BrowserStackCE/bstack-self-heal.git
    ```
 
 2. **Install dependencies**
