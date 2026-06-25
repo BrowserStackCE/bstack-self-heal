@@ -2,7 +2,7 @@
 
 A demo project showcasing **BrowserStack Self-Heal** — an AI-powered feature that automatically fixes broken Selenium selectors when your app's HTML changes.
 
-🔗 **Demo Website:** https://bs_self-heal.site.drasticcoder.in/
+🔗 **Demo Website:** https://bstack_self-heal.site.drasticcoder.in/
 
 ---
 
@@ -19,7 +19,7 @@ A demo project showcasing **BrowserStack Self-Heal** — an AI-powered feature t
 1. **Clone the repository**
 
    ```bash
-   git clone http://github.com/drasticCoder/bs-self-heal.git
+   git clone http://github.com/drasticCoder/bstack-self-heal.git
    ```
 
 2. **Install dependencies**
@@ -62,7 +62,7 @@ A demo project showcasing **BrowserStack Self-Heal** — an AI-powered feature t
 If you don't want to run locally, use the hosted version:
 
 ```
-https://bs_self-heal.site.drasticcoder.in/
+https://bstack_self-heal.site.drasticcoder.in/
 ```
 
 Update `PAGE_URL` in `test.js` to point to this URL instead of `localhost`.
@@ -215,4 +215,4 @@ Self-Heal/
 
 - [BrowserStack Self-Heal Docs](https://www.browserstack.com/docs/automate/selenium/self-healing-tests)
 - [BrowserStack Automate](https://automate.browserstack.com)
-- [Live Demo Site](https://bs_self-heal.site.drasticcoder.in/)
+- [Live Demo Site](https://bstack_self-heal.site.drasticcoder.in/)

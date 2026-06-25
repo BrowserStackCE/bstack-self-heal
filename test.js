@@ -11,7 +11,7 @@
 
 const { Builder, By, until } = require('selenium-webdriver');
 
-const PAGE_URL = 'http://127.0.0.1:5500/'; // OR https://bs_self-heal.site.drasticcoder.in/
+const PAGE_URL = 'http://127.0.0.1:5500/'; // OR https://bstack_self-heal.site.drasticcoder.in/
 const WAIT = 10000;
 
 describe('Sweet Crumbs Bakery', () => {
